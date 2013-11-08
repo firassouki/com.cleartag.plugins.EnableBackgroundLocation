@@ -15,12 +15,30 @@
     <engine name="cordova" version=">=3.0.0"/>
   </engines>
 
-  <platform name="ios">
-    <config-file target="*-Info.plist" parent="UIBackgroundModes">
-      <array>
-        <string>location</string>
-    </array>
-    </config-file>
-  </platform>
+  <js-module src="www/backgroundLocationEnabler.js" name="backgroundlocationenabler">
+            <clobbers target="window.BackgroundLocationEnabler" />
+    </js-module>
+
+    <dependency id="org.apache.cordova.geolocation" url="https://github.com/apache/cordova-plugin-geolocation" />
+    
+    <!-- ios -->
+    <platform name="ios">
+       
+        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+            <array>
+                <string>location</string>
+            </array>
+        </config-file>
+                
+        <config-file target="config.xml" parent="/*">
+            <feature name="BackgroundLocationEnabler">
+                <param name="ios-package" value="CDVBackgroundLocationEnabler" />
+            </feature>
+        
+        </config-file>
+        
+        <header-file src="src/ios/CDVBackgroundLocationEnabler.h" />
+        <source-file src="src/ios/CDVBackgroundLocationEnabler.m" />    
+    </platform>
 
 </plugin>
