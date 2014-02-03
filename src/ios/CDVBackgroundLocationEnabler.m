@@ -8,6 +8,7 @@
 - (void)enableUnlimited:(CDVInvokedUrlCommand*)command
 {
     CLLocationManager* locationManager = [[CLLocationManager alloc] init];
+    locationManager.pausesLocationUpdatesAutomatically = NO;
     [locationManager startUpdatingLocation];
 }
 
